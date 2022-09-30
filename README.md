@@ -2,7 +2,7 @@
 
 ## Equipo de desarrollo
 
-Cecilia Dragonetti
+Cecilia Dragonetti\n
 Herman Suren Tekyan
 Bautista Turri
 Juana Molina
