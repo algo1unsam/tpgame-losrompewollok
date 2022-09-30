@@ -1,0 +1,8 @@
+import wollok.game.*
+import tablero.*
+import sonidos.*
+
+program CarpinchoAventura {
+	tablero.iniciar()
+	game.start()
+}
