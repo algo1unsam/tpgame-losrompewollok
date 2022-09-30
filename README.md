@@ -2,9 +2,12 @@
 
 ## Equipo de desarrollo
 
-Cecilia Dragonetti\n
+Cecilia Dragonetti
+
 Herman Suren Tekyan
+
 Bautista Turri
+
 Juana Molina
 
 ## Capturas
