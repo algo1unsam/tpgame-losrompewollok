@@ -1,4 +1,4 @@
-# Nombre del juego (<- borrar y completar)
+# Las aventuras de Carpy
 
 ## Equipo de desarrollo
 
