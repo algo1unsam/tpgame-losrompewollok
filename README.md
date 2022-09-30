@@ -2,9 +2,10 @@
 
 ## Equipo de desarrollo
 
-- Alguien
-- Persona
-- etc.
+Cecilia Dragonetti
+Herman Suren Tekyan
+Bautista Turri
+Juana Molina
 
 ## Capturas
 
