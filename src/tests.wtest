@@ -1,6 +1,15 @@
+import personajes.*
 
-test "testX" {
-
-	assert.that(true)
-
+describe "test carpincho"{
+	
+	const comida1 = new Comida(valor = 1)
+	const comida2 = new Comida(valor = 5)
+	const comida3 = new Comida(valor = 10)
+	
+	test "el carpincho agarra comida"{
+		Carpy.agarrar(comida1)
+		Carpy.agarrar(comida2)
+		Carpy.agarrar(comida3)
+		assert.equals(16,Carpy.comidas())
+	}
 }
