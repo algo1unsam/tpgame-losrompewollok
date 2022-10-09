@@ -17,7 +17,7 @@ object Carpy{
 		position = position.right()
 	}
 	
-	method image() = "carpy.png"
+	method image() = "carpy.jpg"
 	
 	
 	
@@ -32,13 +32,20 @@ object Carpy{
 }
 
 object juego{
+	const anchoTotal = 18
+	const altoTotal = 12
 	method iniciar(){
+		game.clear()
+		game.title("aventuras carpincho")
+		game.width(anchoTotal)
+		game.height(altoTotal)
+		game.ground("fondo_verde.jpg")
 		game.addVisualCharacter(Carpy)
 		game.onTick(1000,"Aparece comida",{self.aparecerComida()})
 		
 		game.onCollideDo(Carpy,{comida => Carpy.agarrar(comida)})
 		
-		game.start()
+		
 	}
 	
 	
@@ -60,5 +67,5 @@ class Comida{
 	var property position
 	var property valor
 	
-	method image() = "comida.png"
+	method image() = "zanahoria.png"
 }
