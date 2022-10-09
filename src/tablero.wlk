@@ -2,6 +2,7 @@ import wollok.game.*
 import sonidos.*
 import menus.*
 import teclado.*
+import personajes.*
 object tablero {
 
 	const sonidoDeFondo = "sonido2.mp3"
@@ -21,6 +22,8 @@ object tablero {
 	method setearMenuInicial() {
 		self.limpiarTablero()
 		menuInicial.iniciar()
+		
+	
 	}
 
 	method iniciar() {
