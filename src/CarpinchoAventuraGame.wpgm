@@ -3,7 +3,8 @@ import tablero.*
 import sonidos.*
 import personajes.*
 
+
 program CarpinchoAventura {
 	tablero.iniciar()
-	juego.iniciar()
+	game.start()
 }
