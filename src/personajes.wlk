@@ -68,4 +68,4 @@ class Comida{
 	var property valor
 	
 	method image() = "zanahoria.png"
-}
+}//agregados
