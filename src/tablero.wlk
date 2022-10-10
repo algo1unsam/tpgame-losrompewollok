@@ -3,7 +3,7 @@ import sonidos.*
 import menus.*
 import teclado.*
 import personajes.*
-object tablero {
+object tablero {//s
 
 	const sonidoDeFondo = "sonido2.mp3"
 
