@@ -32,7 +32,7 @@ object carpy{
     method perderVida() {
         energiaT -= 15
         if(energiaT <= 0){
-            game.stop()
+            juego.terminar()
         }
         }
     method tirarPoder(){
