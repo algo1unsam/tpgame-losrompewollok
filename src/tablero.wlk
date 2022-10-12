@@ -5,7 +5,7 @@ import teclado.*
 import personajes.*
 object tablero {//s
 
-	const sonidoDeFondo = "sonido2.mp3"
+	//const sonidoDeFondo = "sonido2.mp3"
 
 	method setearFondo() {
 		game.title("Aventuras carpinchescas")
@@ -29,7 +29,7 @@ object tablero {//s
 	method iniciar() {
 		self.setearFondo()
 		self.setearMenuInicial()
-		sonido.iniciar(sonidoDeFondo, true, 0)
+		//sonido.iniciar(sonidoDeFondo, true, 0)
 	}
 
 	method setearMenuInstruccionesTeclas() {
