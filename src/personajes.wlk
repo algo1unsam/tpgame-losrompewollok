@@ -39,7 +39,7 @@ object carpy{
     	if(energiaT>=45){
     		game.addVisual(poder)
     		energiaT -=40
-    		game.removeVisual(poder)
+  
     	}else{
     		game.say(self,"NO TENGO ENERGIA")
     	}
