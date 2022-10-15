@@ -1,15 +1,17 @@
 import wollok.game.*
 import elementosVisibles.*
+import tablero.*
+
 object carpy{
-    var energiaT = 20
+    var energiaT = 200
     var position = game.origin()
 
-    method agarrar(comida){
+    method agarrar(cosas){
 
         //las cominas tienen distinto valor
-        energiaT +=    comida.energia()
+        energiaT +=    cosas.energia()
 
-        game.removeVisual(comida)
+        game.removeVisual(cosas)
     }
 
     method energia() = energiaT //Devuelve la cantidad de comidas
@@ -19,8 +21,6 @@ object carpy{
     }
 
     method image() = "carpincho.png"
-
-
 
     method position(){
         return position
@@ -39,7 +39,7 @@ object carpy{
     	if(energiaT>=45){
     		game.addVisual(poder)
     		energiaT -=40
-  
+    		game.schedule(2000,{game.removeVisual(poder)})
     	}else{
     		game.say(self,"NO TENGO ENERGIA")
     	}
@@ -47,6 +47,32 @@ object carpy{
     }
 }
 
+object arbol inherits ElementoVisible(image = "arbol.png", position = game.at(2, game.height()).down(5)) {
+	    method  teChocoCarpy(){
+		 game.removeVisual(self)
+		 game.addVisual(tesoro)
+}}
+
+object tesoro inherits ElementoVisible(image = "tesoro.png", position = game.at(4, game.height()).down(5)){
+	method energia() = 100
+}
+
+object arbolito inherits ElementoVisible(image = "arbolito.png", position = game.at(10, game.height()).down(10)) {
+	    method  teChocoCarpy(){
+		 game.removeVisual(self)
+		 game.addVisual(vibora)
+}}
+
+object vibora inherits ElementoVisible(image = "vibora.png", position = game.at(12, game.height()).down(10)){
+	method energia() = -100
+}
+
+
+
+
+object poder inherits ElementoVisible(image = "caca.png", position = carpy.position()){
+	
+}
 
 object casa inherits ElementoVisible(image = "casa.png", position = game.at(12, game.height()).down(3)) {
 	    method  teChocoCarpy(){
@@ -55,9 +81,7 @@ object casa inherits ElementoVisible(image = "casa.png", position = game.at(12, 
 }
  		method energia(){}
 }
-object poder inherits ElementoVisible(image = "caca.png", position = game.at(10, game.height()).down(5)){
-	
-}
+
 object mujer inherits ElementoVisible(image = "mujer.png", position = game.at(10, game.height()).down(5)) {
 
 
@@ -99,9 +123,19 @@ object juego{
         game.addVisualCharacter(carpy)
         game.onTick(5000,"Aparece comida",{self.aparecerComida()})
 
-        game.onCollideDo(carpy,{comida => carpy.agarrar(comida)})
+        
         game.addVisual(vida)
         game.addVisual(casa)
+        
+        
+        game.addVisual(arbol)
+        game.addVisual(arbolito)
+        
+        game.onCollideDo(carpy,{vibora => carpy.agarrar(vibora)})
+        game.onCollideDo(carpy,{tesoro => carpy.agarrar(tesoro)})
+        game.onCollideDo(carpy,{comida => carpy.agarrar(comida)})
+        game.onCollideDo(carpy,{arbolito=> arbolito.teChocoCarpy()})
+        game.onCollideDo(carpy,{arbol=> arbol.teChocoCarpy()})
         game.onCollideDo(carpy,{casa=> casa.teChocoCarpy()})
 		game.onCollideDo(carpy,{mujer=> mujer.teAgarre()})
 		keyboard.s().onPressDo({
@@ -129,7 +163,8 @@ object juego{
 
 
     }
-
+    
+    
 
 
 
