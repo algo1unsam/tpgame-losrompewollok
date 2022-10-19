@@ -1,15 +1,17 @@
 import wollok.game.*
 import elementosVisibles.*
+import tablero.*
+
 object carpy{
-    var energiaT = 20
+    var energiaT = 200
     var position = game.origin()
 
-    method agarrar(comida){
+    method agarrar(cosas){
 
         //las cominas tienen distinto valor
-        energiaT +=    comida.energia()
+        energiaT +=    cosas.energia()
 
-        game.removeVisual(comida)
+        game.removeVisual(cosas)
     }
 
     method energia() = energiaT //Devuelve la cantidad de comidas
@@ -19,8 +21,6 @@ object carpy{
     }
 
     method image() = "carpincho.png"
-
-
 
     method position(){
         return position
@@ -39,7 +39,7 @@ object carpy{
     	if(energiaT>=45){
     		game.addVisual(poder)
     		energiaT -=40
-  
+    		game.schedule(2000,{game.removeVisual(poder)})
     	}else{
     		game.say(self,"NO TENGO ENERGIA")
     	}
@@ -48,6 +48,29 @@ object carpy{
 }
 
 
+
+object tesoro inherits ElementoVisible(image = "tesoro.png", position = game.at(4, game.height()).down(5)){
+	method energia() = 100
+}
+
+
+
+object vibora inherits ElementoVisible(image = "vibora.png", position = game.at(12, game.height()).down(10)){
+	method energia() = -100
+}
+object viborita inherits ElementoVisible(image = "vibora.png", position = game.at(12, game.height()).down(12)){
+	method energia() = -100
+}
+object viboritata inherits ElementoVisible(image = "vibora.png", position = game.at(12, game.height()).down(9)){
+	method energia() = -100
+}
+
+
+
+object poder inherits ElementoVisible(image = "caca.png", position = carpy.position()){
+	
+}
+
 object casa inherits ElementoVisible(image = "casa.png", position = game.at(12, game.height()).down(3)) {
 	    method  teChocoCarpy(){
 		 game.addVisual(mujer)
@@ -55,9 +78,7 @@ object casa inherits ElementoVisible(image = "casa.png", position = game.at(12, 
 }
  		method energia(){}
 }
-object poder inherits ElementoVisible(image = "caca.png", position = game.at(10, game.height()).down(5)){
-	
-}
+
 object mujer inherits ElementoVisible(image = "mujer.png", position = game.at(10, game.height()).down(5)) {
 
 
@@ -98,10 +119,20 @@ object juego{
         game.ground("fondo_verde.jpg")
         game.addVisualCharacter(carpy)
         game.onTick(5000,"Aparece comida",{self.aparecerComida()})
+        game.onTick(5000,"Aparece arboles",{self.aparecerArboles()})
 
-        game.onCollideDo(carpy,{comida => carpy.agarrar(comida)})
+        
         game.addVisual(vida)
         game.addVisual(casa)
+        
+        
+        
+        
+        game.onCollideDo(carpy,{vibora => carpy.agarrar(vibora)})
+        game.onCollideDo(carpy,{tesoro => carpy.agarrar(tesoro)})
+        game.onCollideDo(carpy,{comida => carpy.agarrar(comida)})
+        game.onCollideDo(carpy,{arbolito=> arbolito.teChocoCarpy()})
+        game.onCollideDo(carpy,{arbol=> arbol.teChocoCarpy()})
         game.onCollideDo(carpy,{casa=> casa.teChocoCarpy()})
 		game.onCollideDo(carpy,{mujer=> mujer.teAgarre()})
 		keyboard.s().onPressDo({
@@ -113,6 +144,20 @@ object juego{
         game.clear()
         game.addVisual(poder)
         game.say(carpy,"PERDI")
+    }
+    
+     method aparecerArboles(){
+        const x = (0..game.height()-1).anyOne()
+        const y = (0..game.width()-1).anyOne()
+        game.addVisual(
+            new Arboles(position = game.at(x,y))
+        )
+
+        game.addVisual(
+            new Arboles(position= game.at(x+2,y+3))
+            )
+
+
     }
 
 
@@ -129,6 +174,38 @@ object juego{
 
 
     }
+    
+    
+
+
+
+}
+class Arboles{
+	var property position
+	var lista = [tesoro,vibora]
+
+    method image() = "arbol.png"
+    method  teChocoCarpy(){
+		 game.removeVisual(self)
+		 game.addVisual(lista.anyOne())
+}
+
+    
+}
+
+class Comida{
+
+    var property position
+    var property energia
+    var property imagen
+
+    method image() = imagen
+    
+
+}
+
+const zanahoria = new Comida(energia = 10, imagen ="zana.png", position = game.at((0..game.height()-1).anyOne(),(0..game.height()-1).anyOne())) 
+const manzana = new Comida( energia = 5, imagen ="manzana.png",position= game.at((0..game.height()-1).anyOne(),(0..game.height()-1).anyOne()))
 
 
 
