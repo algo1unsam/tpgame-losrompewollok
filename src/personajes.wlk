@@ -193,25 +193,7 @@ class Arboles{
     
 }
 
-class Comida{
 
-    var property position
-    var property energia
-    var property imagen
-
-    method image() = imagen
-    
-
-}
-
-const zanahoria = new Comida(energia = 10, imagen ="zana.png", position = game.at((0..game.height()-1).anyOne(),(0..game.height()-1).anyOne())) 
-const manzana = new Comida( energia = 5, imagen ="manzana.png",position= game.at((0..game.height()-1).anyOne(),(0..game.height()-1).anyOne()))
-
-
-
-
-
-}
 
 class Comida{
 
@@ -221,6 +203,3 @@ class Comida{
 
     method image() = imagen
 }
-
-const zanahoria = new Comida(energia = 10, imagen ="zana.png", position = game.at((0..game.height()-1).anyOne(),(0..game.height()-1).anyOne())) 
-const manzana = new Comida( energia = 5, imagen ="manzana.png",position= game.at((0..game.height()-1).anyOne(),(0..game.height()-1).anyOne()))
