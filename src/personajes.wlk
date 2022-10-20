@@ -8,11 +8,19 @@ import menus.*
 object carpy{
     var energiaT = 20
     var position = game.origin()
+    var tesoros = 0
 
     method agarrar(cosas){
 
         //las cominas tienen distinto valor
         energiaT +=    cosas.energia()
+        if (cosas == tesoro){
+        	tesoros += 1
+        }
+        if (tesoros == 3){
+        	juego.terminar()
+        	
+        }
 
         game.removeVisual(cosas)
     }
@@ -167,7 +175,6 @@ object juego{
         game.addVisual(restart)
         game.addVisual(exit)
         teclado.configurarTeclasMenuInicial()
-        
         
     }
     
