@@ -7,19 +7,21 @@ object teclado {
 
 	method configurarTeclasMenuInicial() {
 		// Tecla Mostrar Keys Configuradas Por Jugador
-		keyboard.space().onPressDo({juego.iniciar()})
-
+		keyboard.space().onPressDo({pantallaInstrucciones.iniciar()})
+		
 		// Tecla Finalizar Juego
-		keyboard.control().onPressDo({ tablero.finalizarJuego()})
-	}
+		keyboard.control().onPressDo({ game.stop()})
 
-	method configurarTeclasMenuFinal() {
-		// Tecla Menu Inicial
+	}
+	
+	method configurarTeclasMenuInstrucciones() {
+		// Tecla Mostrar Keys Configuradas Por Jugador
 		keyboard.space().onPressDo({juego.iniciar()})
-		// Tecla Finalizar Juego
-		keyboard.alt().onPressDo({ tablero.finalizarJuego()})
-	}
+		
 
+	}
 	
 
+
 }
+
