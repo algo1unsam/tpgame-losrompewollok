@@ -1,6 +1,8 @@
 import wollok.game.*
 import elementosVisibles.*
 import tablero.*
+import teclado.*
+
 
 object carpy{
     var energiaT = 200
@@ -47,26 +49,23 @@ object carpy{
     }
 }
 
-object arbol inherits ElementoVisible(image = "arbol.png", position = game.at(2, game.height()).down(5)) {
-	    method  teChocoCarpy(){
-		 game.removeVisual(self)
-		 game.addVisual(tesoro)
-}}
+
 
 object tesoro inherits ElementoVisible(image = "tesoro.png", position = game.at(4, game.height()).down(5)){
 	method energia() = 100
 }
 
-object arbolito inherits ElementoVisible(image = "arbolito.png", position = game.at(10, game.height()).down(10)) {
-	    method  teChocoCarpy(){
-		 game.removeVisual(self)
-		 game.addVisual(vibora)
-}}
+
 
 object vibora inherits ElementoVisible(image = "vibora.png", position = game.at(12, game.height()).down(10)){
 	method energia() = -100
 }
-
+object viborita inherits ElementoVisible(image = "vibora.png", position = game.at(12, game.height()).down(12)){
+	method energia() = -100
+}
+object viboritata inherits ElementoVisible(image = "vibora.png", position = game.at(12, game.height()).down(9)){
+	method energia() = -100
+}
 
 
 
@@ -111,6 +110,8 @@ object vida {
 	}
 
 }
+
+
 object juego{
     const anchoTotal = 17
     const altoTotal = 16
@@ -122,14 +123,10 @@ object juego{
         game.ground("fondo_verde.jpg")
         game.addVisualCharacter(carpy)
         game.onTick(5000,"Aparece comida",{self.aparecerComida()})
+        game.onTick(5000,"Aparece arboles",{self.aparecerArboles()})
 
-        
         game.addVisual(vida)
         game.addVisual(casa)
-        
-        
-        game.addVisual(arbol)
-        game.addVisual(arbolito)
         
         game.onCollideDo(carpy,{vibora => carpy.agarrar(vibora)})
         game.onCollideDo(carpy,{tesoro => carpy.agarrar(tesoro)})
@@ -148,8 +145,21 @@ object juego{
         game.addVisual(poder)
         game.say(carpy,"PERDI")
     }
+    
+     method aparecerArboles(){
+        const x = (0..game.height()-1).anyOne()
+        const y = (0..game.width()-1).anyOne()
+        game.addVisual(
+            new Arboles(position = game.at(x,y))
+        )
+
+        game.addVisual(
+            new Arboles(position= game.at(x+2,y+3))
+            )
 
 
+    }
+    
     method aparecerComida(){
         const x = (0..game.height()-1).anyOne()
         const y = (0..game.width()-1).anyOne()
@@ -163,13 +173,19 @@ object juego{
 
 
     }
-    
-    
-
-
-
-
 }
+
+class Arboles{
+	var property position
+	var lista = [tesoro,vibora]
+
+    method image() = "arbol.png"
+    method  teChocoCarpy(){
+		 game.removeVisual(self)
+		 game.addVisual(lista.anyOne())
+}
+}
+
 
 class Comida{
 
@@ -179,6 +195,3 @@ class Comida{
 
     method image() = imagen
 }
-
-const zanahoria = new Comida(energia = 10, imagen ="zana.png", position = game.at((0..game.height()-1).anyOne(),(0..game.height()-1).anyOne())) 
-const manzana = new Comida( energia = 5, imagen ="manzana.png",position= game.at((0..game.height()-1).anyOne(),(0..game.height()-1).anyOne()))
