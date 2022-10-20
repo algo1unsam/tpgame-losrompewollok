@@ -4,7 +4,7 @@ import teclado.*
 
 
 
-object titulo inherits ElementoVisible(image = "presentacion3.png", position = game.at(5, game.height()).down(6)) {
+object titulo inherits ElementoVisible(image = "presentacion3.png", position = game.at(4, game.height()).down(7)) {
 
 }
 
