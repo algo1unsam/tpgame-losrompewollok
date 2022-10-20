@@ -5,6 +5,6 @@ import personajes.*
 
 
 program CarpinchoAventura {
-	tablero.iniciar()//Agregado
+	tablero.iniciar()
 	game.start()
 }
