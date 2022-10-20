@@ -4,19 +4,27 @@ import teclado.*
 
 
 
-object titulo inherits ElementoVisible(image = "presentacion3.png", position = game.at(4, game.height()).down(6)) {
+object titulo inherits ElementoVisible(image = "presentacion3.png", position = game.at(5, game.height()).down(6)) {
 
 }
 
-object instrucciones inherits ElementoVisible(image = "instru.png", position = game.at(2, game.height()).down(12)) {
+object instrucciones inherits ElementoVisible(image = "instru.png", position = game.at(4, game.height()).down(10)) {
 
 }
 
-object start inherits ElementoVisible(image = "start.png", position = game.at(6, game.height()).down(8)) {
+object start inherits ElementoVisible(image = "start.png", position = game.at(7, game.height()).down(8)) {
 
 }
 
-object exit inherits ElementoVisible(image = "exit.png", position = start.position().down(1)) {
+object restart inherits ElementoVisible(image = "restart.png", position = game.at(7, game.height()).down(11)) {
+
+}
+
+object exit inherits ElementoVisible(image = "exit.png", position = game.at(7, game.height()).down(9)) {
+
+}
+
+object gameOver inherits ElementoVisible(image = "gameOver.png", position = game.at(4, game.height()).down(10)){
 
 }
 
