@@ -3,7 +3,8 @@ import sonidos.*
 import menus.*
 import teclado.*
 import personajes.*
-object tablero {//s
+
+object tablero {
 
 	//const sonidoDeFondo = "sonido2.mp3"
 
@@ -13,6 +14,7 @@ object tablero {//s
 		game.width(17)
 		game.height(16)
 		game.ground("fondo_verde.jpg")
+		
 	}
 
 	method limpiarTablero() {
@@ -22,24 +24,12 @@ object tablero {//s
 	method setearMenuInicial() {
 		self.limpiarTablero()
 		menuInicial.iniciar()
-		
-	
 	}
-
+	
 	method iniciar() {
 		self.setearFondo()
 		self.setearMenuInicial()
-		//sonido.iniciar(sonidoDeFondo, true, 0)
 	}
-
-	method setearMenuInstruccionesTeclas() {
-		self.limpiarTablero()
-		menuInstruccionesTeclas.iniciar()
-	}
-
-
-	method finalizarJuego() {
-		game.stop()
-	}
+	
 
 }
