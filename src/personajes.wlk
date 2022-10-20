@@ -163,8 +163,10 @@ object juego{
     }
         method terminar(){
         game.clear()
-        game.addVisual(titulo) //Aca va el Game Over
-        //game.say(carpy,"PERDI")
+        game.addVisual(gameOver) 
+        game.addVisual(restart)
+        game.addVisual(exit)
+        teclado.configurarTeclasMenuInicial()
         
         
     }
