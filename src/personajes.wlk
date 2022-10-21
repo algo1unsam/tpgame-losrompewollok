@@ -23,7 +23,7 @@ object carpy{
         	tesoros += 1
         }
         if (tesoros == 3){
-        	juego.terminar()
+        	juego.terminarGanador()
         	
         }
 
@@ -182,6 +182,16 @@ object juego{
         game.addVisual(exit)
         teclado.configurarTeclasMenuInicial()
         
+    }
+    
+     method terminarGanador(){
+        game.clear()
+        game.addVisual(gameOverGanador) 
+        game.addVisual(restart)
+        game.addVisual(exit)     
+        //sonido.iniciar(sonidoDeFondo, true, 0)
+
+        teclado.configurarTeclasMenuInicial()
     }
     
      method aparecerArboles(){
