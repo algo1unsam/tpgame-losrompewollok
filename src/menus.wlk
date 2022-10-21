@@ -28,6 +28,10 @@ object gameOver inherits ElementoVisible(image = "gameOver.png", position = game
 
 }
 
+object gameOverGanador inherits ElementoVisible(image = "gameOverGanador.png", position = game.at(4, game.height()).down(10)){
+
+}
+
 
 class Menu {
 
