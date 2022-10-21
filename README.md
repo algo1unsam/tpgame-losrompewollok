@@ -12,11 +12,12 @@ Juana Molina
 
 ## Capturas
 
-(agregar)
+![captura](https://user-images.githubusercontent.com/40583326/197297478-fe6c7919-c6f8-4465-a9df-9f2489716993.png)
 
 ## Reglas de Juego / Instrucciones
 
-(Escribirlas)
+![instru](https://user-images.githubusercontent.com/40583326/197297289-7e2c6178-582d-448e-a055-308368337790.png)
+
 
 
 ## Otros
