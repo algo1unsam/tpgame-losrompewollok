@@ -6,12 +6,13 @@ import menus.*
 
 
 object carpy{
-    var energiaT = 20
+    var energiaT = 100
     var position = game.origin()
     var tesoros = 0
     
-     method reiniciarEnergia(){
-    	energiaT = 500
+    method reiniciarEstado(){
+    	energiaT = 100
+    	tesoros = 0
     }
 
     method agarrar(cosas){
@@ -142,7 +143,7 @@ object juego{
         game.height(altoTotal)
         game.ground("fondo_verde.jpg")
         game.addVisualCharacter(carpy)
-	carpy.reiniciarEnergia()
+	carpy.reiniciarEstado() 
         
         
         
