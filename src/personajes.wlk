@@ -17,8 +17,8 @@ object carpy{
 
     method agarrar(cosas){
 
-        //las cominas tienen distinto valor
-        energiaT +=    cosas.energia()
+    //las cominas tienen distinto valor
+        energiaT += cosas.energia()
         if (cosas == tesoro){
         	tesoros += 1
         }
@@ -29,9 +29,11 @@ object carpy{
 
         game.removeVisual(cosas)
     }
-
+	
     method energia() = energiaT //Devuelve la cantidad de comidas
-
+	
+	method tesoros() = tesoros//devuelve cantidad tesoros
+	
     method moverse(){
         position = position.right()
     }
@@ -51,16 +53,21 @@ object carpy{
             juego.terminar()
         }
         }
+        
     method tirarPoder(){
     	if(energiaT>=45){
     		const poder = new ElementoVisible(image = "caca.png", position = self.position())  
     		game.addVisual(poder)
     		energiaT -=40
-    		game.schedule(2000,{game.removeVisual(poder)})
+    		self.eliminarCaca(20000, poder)
     	}else{
     		game.say(self,"NO TENGO ENERGIA")
     	}
     	
+    }
+    
+    method eliminarCaca(tiempo,poder){
+    	game.schedule(tiempo,{game.removeVisual(poder)})
     }
 }
 
@@ -69,13 +76,22 @@ object carpy{
 object tesoro inherits ElementoVisible(image = "tesoro.png", position = game.at(4, game.height()).down(5)){
 	method energia() = 100
 }
-
+//muestra como en vida la canntidad de tesoros que va junstando
+object cantidadTesoros{
+	method text(){
+		return "tesoros" + carpy.tesoros()
+	}
+	method position(){
+	 return game.at(15, game.height()).down(5)
+	}
+}
 
 
 object vibora inherits ElementoVisible(image = "vibora.png", position = game.at(12, game.height()).down(10)){
 	method teAgarre(){
 	carpy.perderVida(50)
 }
+
 }
 object viborita inherits ElementoVisible(image = "vibora.png", position = game.at(12, game.height()).down(12)){
 	method teAgarre(){
@@ -92,7 +108,7 @@ object viboritata inherits ElementoVisible(image = "vibora.png", position = game
 
 
 
-object casa inherits ElementoVisible(image = "casa.png", position = game.at(12, game.height()).down(3)) {
+object casa inherits ElementoVisible(image = "casa.png", position = game.at(12, game.height()).down(6)) {
 	    method  teChocoCarpy(){
 		 game.addVisual(mujer)
 		 mujer.perseguirACarpy()
@@ -100,10 +116,19 @@ object casa inherits ElementoVisible(image = "casa.png", position = game.at(12, 
  		method energia(){}
 }
 
-object mujer inherits ElementoVisible(image = "mujer.png", position = game.at(10, game.height()).down(5)) {
+object mujer inherits ElementoVisible(image = "mujer.png", position = game.at(11, game.height()).down(6)) {
+	const acercarse="acercarse"
+	method chetaParar(){
+		game.removeTickEvent(acercarse)
+		game.schedule(7000, {self.perseguirACarpy()})
+	}
+	
+	method pisarMierda(caca){
+		self.chetaParar()
+		carpy.eliminarCaca(0, caca)
+	}
 
-
-	method perseguirACarpy(){game.onTick(1000,"acercarse",{self.darUnPaso(carpy.position())}) }
+	method perseguirACarpy(){game.onTick(1000,acercarse,{self.darUnPaso(carpy.position())}) }
     method darUnPaso(destino){
  
         	position = game.at(
@@ -127,10 +152,11 @@ object vida {
 		return "Energia: " + carpy.energia()
 	}
 	method position(){
-	 return game.at(15, game.height()).down(1)
+	 return game.at(15, game.height()).down(4)
 	}
 
 }
+
 
 
 object juego{
@@ -147,8 +173,8 @@ object juego{
         
         
         
-        game.onTick(1000,"Aparece comida",{self.aparecerComida()})
-        game.onTick(1000,"Aparece arboles",{self.aparecerArboles()})
+        game.onTick(2000,"Aparece comida",{self.aparecerComida()})
+        game.onTick(4000,"Aparece arboles",{self.aparecerArboles()})
         
         //game.schedule(10000,{game.removeTickEvent("Aparece comida")})
         //game.schedule(10000, {game.removeTickEvent("Aparece arboles")})
@@ -159,8 +185,10 @@ object juego{
 
 
         game.addVisual(vida)
+        game.addVisual(cantidadTesoros)
         game.addVisual(casa)
         
+       
         game.onCollideDo(carpy,{vibora => carpy.agarrar(vibora)})
         game.onCollideDo(carpy,{tesoro => carpy.agarrar(tesoro)})
         game.onCollideDo(carpy,{comida => carpy.agarrar(comida)})
@@ -173,6 +201,11 @@ object juego{
          
          
         })
+        
+        
+        
+        game.onCollideDo(mujer,{poder => mujer.pisarMierda(poder)})
+        
 
     }
         method terminar(){
@@ -195,8 +228,8 @@ object juego{
     }
     
      method aparecerArboles(){
-        const x = (0..game.height()-2).anyOne()
-        const y = (0..game.width()-1).anyOne()
+        const x = (0..game.height()-3).anyOne()
+        const y = (0..game.width()-2).anyOne()
         game.addVisual(
             new Arboles(position = game.at(x,y))
         )
@@ -209,8 +242,8 @@ object juego{
     }
     
     method aparecerComida(){
-        const x = (0..game.height()-1).anyOne()
-        const y = (0..game.width()-1).anyOne()
+        const x = (0..game.height()-4).anyOne()
+        const y = (0..game.width()-3).anyOne()
         game.addVisual(
              new Comida(energia = 10, imagen ="zana.png", position = game.at(x,y))
         )
