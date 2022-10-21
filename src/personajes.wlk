@@ -9,6 +9,10 @@ object carpy{
     var energiaT = 20
     var position = game.origin()
     var tesoros = 0
+    
+     method reiniciarEnergia(){
+    	energiaT = 500
+    }
 
     method agarrar(cosas){
 
@@ -138,6 +142,7 @@ object juego{
         game.height(altoTotal)
         game.ground("fondo_verde.jpg")
         game.addVisualCharacter(carpy)
+	carpy.reiniciarEnergia()
         
         
         
