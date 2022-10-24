@@ -82,7 +82,7 @@ object cantidadTesoros{
 		return "tesoros" + carpy.tesoros()
 	}
 	method position(){
-	 return game.at(15, game.height()).down(5)
+	 return game.at(0, game.height()).down(4) //Cambio de la posicion
 	}
 }
 
@@ -173,16 +173,16 @@ object juego{
         
         
         
-        game.onTick(2000,"Aparece comida",{self.aparecerComida()})
-        game.onTick(4000,"Aparece arboles",{self.aparecerArboles()})
+        game.onTick(1000,"Aparece comida",{self.aparecerComida()})
+        game.onTick(1000,"Aparece arboles",{self.aparecerArboles()})
         
         //game.schedule(10000,{game.removeTickEvent("Aparece comida")})
         //game.schedule(10000, {game.removeTickEvent("Aparece arboles")})
 
 
+		//Agregado tesoro ranking==>
 
-
-
+		game.addVisual(new ElementoVisible(image = "tesorito1.png",position= game.at(0, game.height()).down(4)))
 
         game.addVisual(vida)
         game.addVisual(cantidadTesoros)
@@ -231,11 +231,11 @@ object juego{
         const x = (0..game.height()-3).anyOne()
         const y = (0..game.width()-2).anyOne()
         game.addVisual(
-            new Arboles(position = game.at(x,y))
+            new Arboles(position = game.at(x+1,y-8))
         )
 
         game.addVisual(
-            new Arboles(position= game.at(x+2,y+3))
+            new Arboles(position= game.at(x+5,y-10))
             )
 
 
@@ -245,11 +245,11 @@ object juego{
         const x = (0..game.height()-4).anyOne()
         const y = (0..game.width()-3).anyOne()
         game.addVisual(
-             new Comida(energia = 10, imagen ="zana.png", position = game.at(x,y))
+             new Comida(energia = 10, imagen ="zana.png", position = game.at(x+3,y-9))
         )
 
         game.addVisual(
-            new Comida( energia = 5, imagen ="manzana.png",position= game.at(x+2,y+3))
+            new Comida( energia = 5, imagen ="manzana.png",position= game.at(x+7,y-10))
             )
 
 
