@@ -29,6 +29,7 @@ object tablero {
 	method iniciar() {
 		self.setearFondo()
 		self.setearMenuInicial()
+		sonido.iniciar(sonidoDeFondo, true, 0)
 	}
 	
 
