@@ -50,7 +50,7 @@ object carpy{
     }
     
     method atacado(){
-    	energiaT - 10
+    	return energiaT - 10
     }
    
 
