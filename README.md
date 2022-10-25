@@ -11,8 +11,10 @@ Bautista Turri
 Juana Molina
 
 ## Capturas
+![principal](https://user-images.githubusercontent.com/40583326/197867796-9437a4d4-43b2-4fd3-a12a-36c0de62424e.jpg)
 
 ![captura](https://user-images.githubusercontent.com/40583326/197297478-fe6c7919-c6f8-4465-a9df-9f2489716993.png)
+
 
 ## Reglas de Juego / Instrucciones
 
