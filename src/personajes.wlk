@@ -6,7 +6,7 @@ import menus.*
 
 
 object carpy{
-    var energiaT = 100
+    var energiaT = 30
     var position = game.origin()
     var tesoros = 0
     
@@ -14,7 +14,12 @@ object carpy{
     	energiaT = 100
     	tesoros = 0
     }
-
+    method energiaPoder(){
+    	energiaT= 50
+    }
+	method estaMuerto(){
+		energiaT = 0
+	}
     method agarrar(cosas){
 
     //las cominas tienen distinto valor
@@ -43,6 +48,11 @@ object carpy{
     method position(){
         return position
     }
+    
+    method atacado(){
+    	energiaT - 10
+    }
+   
 
     method position(nuevaPosicion){
         position = nuevaPosicion
@@ -64,6 +74,7 @@ object carpy{
     		game.say(self,"NO TENGO ENERGIA")
     	}
     	
+    	
     }
     
     method eliminarCaca(tiempo,poder){
@@ -79,7 +90,7 @@ object tesoro inherits ElementoVisible(image = "tesoro.png", position = game.at(
 //muestra como en vida la canntidad de tesoros que va junstando
 object cantidadTesoros{
 	method text(){
-		return "tesoros" + carpy.tesoros()
+		return "  tesoros: " + carpy.tesoros()
 	}
 	method position(){
 	 return game.at(0, game.height()).down(4) //Cambio de la posicion
@@ -173,8 +184,8 @@ object juego{
         
         
         
-        game.onTick(1000,"Aparece comida",{self.aparecerComida()})
-        game.onTick(1000,"Aparece arboles",{self.aparecerArboles()})
+        game.onTick(2000,"Aparece comida",{self.aparecerComida()})
+        game.onTick(2000,"Aparece arboles",{self.aparecerArboles()})
         
         //game.schedule(10000,{game.removeTickEvent("Aparece comida")})
         //game.schedule(10000, {game.removeTickEvent("Aparece arboles")})
@@ -231,11 +242,11 @@ object juego{
         const x = (0..game.height()-3).anyOne()
         const y = (0..game.width()-2).anyOne()
         game.addVisual(
-            new Arboles(position = game.at(x+1,y-8))
+            new Arboles(position = game.at(x+1,y-5))
         )
 
         game.addVisual(
-            new Arboles(position= game.at(x+5,y-10))
+            new Arboles(position= game.at(x+5,y-5))
             )
 
 
@@ -257,6 +268,7 @@ object juego{
 }
 
 class Arboles{
+	
 	var property position
 	var lista = [tesoro,vibora]
 
@@ -265,12 +277,16 @@ class Arboles{
 		 game.removeVisual(self)
 		 game.addVisual(lista.anyOne())
 }
+
+
+
+
 }
 
 
 class Comida{
-
-    var property position
+	
+    var property position = ""
     var property energia
     var property imagen
 
