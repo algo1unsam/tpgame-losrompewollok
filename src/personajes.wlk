@@ -11,7 +11,7 @@ object carpy{
     var tesoros = 0
     
     method reiniciarEstado(){
-    	energiaT = 100
+    	energiaT = 30
     	tesoros = 0
     }
     method energiaPoder(){
