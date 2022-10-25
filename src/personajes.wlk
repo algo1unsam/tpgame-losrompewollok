@@ -104,16 +104,7 @@ object vibora inherits ElementoVisible(image = "vibora.png", position = game.at(
 }
 
 }
-object viborita inherits ElementoVisible(image = "vibora.png", position = game.at(12, game.height()).down(12)){
-	method teAgarre(){
-	carpy.perderVida(50)
-}
-}
-object viboritata inherits ElementoVisible(image = "vibora.png", position = game.at(12, game.height()).down(9)){
-	method teAgarre(){
-	carpy.perderVida(50)
-}
-}
+
 
 
 
