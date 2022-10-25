@@ -291,4 +291,8 @@ class Comida{
     var property imagen
 
     method image() = imagen
+    
+     method energia(){
+    	return energia
+    }
 }
