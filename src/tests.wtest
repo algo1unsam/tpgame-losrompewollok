@@ -2,14 +2,47 @@ import personajes.*
 
 describe "test carpincho"{
 	
-	const comida1 = new Comida(valor = 1)
-	const comida2 = new Comida(valor = 5)
-	const comida3 = new Comida(valor = 10)
+	const comida1 = new Comida(energia = 10, imagen ="zana.png")
+	const comida2 = new Comida(energia = 5, imagen ="manzana.png")
+	const arbol1 = new Arboles()
+	
+	
+	
+	test "si tiene energia igual a 0 , se termina el juego"{
+		carpy.estaMuerto()
+		assert.equals(0,carpy.energia())
+	}
+	
+	
+	
+	test "cuando empieza el juego , carpy tiene 30 de energia"{
+		
+		assert.equals(30,carpy.energia())
+		
+	}
+	
 	
 	test "el carpincho agarra comida"{
-		Carpy.agarrar(comida1)
-		Carpy.agarrar(comida2)
-		Carpy.agarrar(comida3)
-		assert.equals(16,Carpy.comidas())
+		carpy.agarrar(comida1)
+		carpy.agarrar(comida2)
+		
+		assert.equals(45,carpy.energia())
 	}
+	
+	
+	test "si le pegan a carpy 1 vez este 5 de vida"{
+		carpy. perderVida(5)
+		assert.equals(25,carpy.energia())
+	}
+	
+	test "carpy puede moverse"{
+		carpy.moverse()
+		assert.that(carpy.position())
+	}
+	
+	test "al ser atacado tiene 30, si ocurrio al inicio del juego"{
+		carpy.atacado()
+		assert.equals(30,carpy.energia())
+	}
+	
 }
