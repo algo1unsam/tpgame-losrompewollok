@@ -33,28 +33,20 @@ object gameOverGanador inherits ElementoVisible(image = "gameOverGanador.png", p
 }
 
 
-class Menu {
-
-	method agregarOpciones()
-
-	method iniciar() {
-		self.agregarOpciones()
-	}
-
-}
-
-object menuInicial inherits Menu {
 
 
-	override method agregarOpciones() {
+object menuInicial  {
+
+
+	method agregarOpciones() {
 		game.addVisual(titulo)
 		game.addVisual(start)
 		game.addVisual(exit)
 		
 	}
 
-	override method iniciar() {
-		super()
+	 method iniciar() {
+		self.agregarOpciones()
 		teclado.configurarTeclasMenuInicial()
 	}
 }
